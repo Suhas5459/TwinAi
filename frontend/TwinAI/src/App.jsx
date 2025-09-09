@@ -5,6 +5,7 @@ import PersonalityForm from "../pages/PersonalityForm";
 import ProtectedRoute  from "../../components/ProtectedRoute";
 import ChatPage from "../pages/Chatpage";
 import "./index.css";
+import.meta.env.VITE_BACKEND_URL;
 
 function App() {
   return (
