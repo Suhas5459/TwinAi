@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Layout from "../../components/Layout";
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function Register() {
   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
@@ -20,7 +21,7 @@ export default function Register() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/auth/register",
+        `${apiUrl}/api/auth/register`,
         formData
       );
       if (res.data.success) {

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { FaUser } from "react-icons/fa";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -12,7 +13,7 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/login", { email, password });
+      const res = await axios.post(`${apiUrl}/api/auth/login`, { email, password });
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userId", res.data.user.id);
       navigate("/personality");

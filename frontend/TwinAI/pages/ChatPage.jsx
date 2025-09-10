@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function ChatPage() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const userId = localStorage.getItem("userId"); // ✅ get from storage
+  const userId = localStorage.getItem("userId"); 
+  // ✅ get from storage
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -14,7 +16,7 @@ export default function ChatPage() {
     setInput("");
 
     try {
-      const res = await axios.post("http://localhost:3000/api/chat", {
+      const res = await axios.post(`${apiUrl}/api/chat`, {
         userId,
         message: input,
       });

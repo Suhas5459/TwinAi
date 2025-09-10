@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // ✅ import navigate hook
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function PersonalityPage() {
   const [hobbies, setHobbies] = useState("");
@@ -12,7 +13,7 @@ export default function PersonalityPage() {
 
   const navigate = useNavigate(); // ✅ create navigate functiona
 
-  const BASE_URL = "http://localhost:3000/api/personality"; // backend URL
+  const BASE_URL = `${apiUrl}/api/personality`; // backend URL
   const userId = localStorage.getItem("userId"); // must be stored after login
   const token = localStorage.getItem("token");   // auth token
 
