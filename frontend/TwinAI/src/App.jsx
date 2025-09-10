@@ -3,7 +3,7 @@ import Login  from "../pages/Login";
 import Register from "../pages/Register";
 import PersonalityForm from "../pages/PersonalityForm";
 import ProtectedRoute  from "../../components/ProtectedRoute";
-import ChatPage from "../pages/Chatpage";
+import ChatPage from "../pages/ChatPage";
 import "./index.css";
 import.meta.env.VITE_BACKEND_URL;
 
