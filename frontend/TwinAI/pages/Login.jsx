@@ -32,45 +32,64 @@ export default function LoginPage() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="bg-white bg-opacity-80 p-8 rounded-xl shadow-lg w-full max-w-md relative">
-        {/* Floating Icon */}
-        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-yellow-400 p-4 rounded-full shadow-lg">
-          <FaUser className="text-white text-xl" />
+      <div className="w-full max-w-md h-[70vh] flex flex-col justify-center p-0 border-2 border-blue-400 rounded-xl shadow-lg">
+        <div className="px-8 py-10 flex-1 flex flex-col justify-center bg-transparent">
+          <div className="flex flex-col items-center mb-8">
+            <div className="bg-yellow-400 p-4 rounded-full shadow-lg mb-3">
+              <FaUser className="text-white text-2xl" />
+            </div>
+            <h2 className="text-3xl font-bold text-center text-blue-500 mb-1 drop-shadow">
+              Member Login
+            </h2>
+            <p className="text-white text-center mb-6 text-sm drop-shadow">
+              Welcome back to TwinAI
+            </p>
+          </div>
+          {error && (
+            <div className="mb-4">
+              <p className="text-red-300 text-center bg-red-100 bg-opacity-30 py-2 rounded-lg text-sm font-medium drop-shadow">
+                {error}
+              </p>
+            </div>
+          )}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="relative">
+              <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-white text-lg opacity-70" />
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                autoComplete="email"
+                className="w-full pl-11 pr-3 py-3 border border-white border-opacity-30 rounded-lg bg-white/10 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
+            <div className="relative">
+              <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-white text-lg opacity-70" />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                autoComplete="current-password"
+                className="w-full pl-11 pr-3 py-3 border border-white border-opacity-30 rounded-lg bg-white/10 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
+            <button className="w-full bg-blue-500 bg-opacity-80 text-white py-3 rounded-xl shadow-lg transition hover:bg-blue-600 font-semibold disabled:opacity-60 disabled:cursor-not-allowed">
+              LOGIN
+            </button>
+          </form>
+          <div className="mt-8 text-center">
+            <span className="text-white text-sm drop-shadow">
+              Don’t have an account?{" "}
+              <Link to="/register" className="text-blue-200 font-semibold hover:underline">
+                Register
+              </Link>
+            </span>
+          </div>
         </div>
-
-        <h2 className="text-2xl font-bold text-center mt-6 mb-6">Member Login</h2>
-
-        {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
-          />
-
-          <button className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition font-semibold">
-            LOGIN
-          </button>
-        </form>
-
-        <p className="mt-4 text-center">
-          Don’t have an account?{" "}
-          <Link to="/register" className="text-orange-500 hover:underline">
-            Register
-          </Link>
-        </p>
       </div>
     </div>
   );

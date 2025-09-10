@@ -98,43 +98,47 @@ export default function PersonalityPage() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="bg-white bg-opacity-80 rounded-xl shadow-lg w-full max-w-md h-[90vh] flex flex-col justify-center p-0">
-        <div className="px-8 py-10 flex-1 flex flex-col justify-center">
-          <h2 className="text-3xl font-bold mb-6 text-center text-indigo-700">Your Personality</h2>
+      <div className="w-full max-w-md h-[70vh] flex flex-col justify-center p-0 border-2 border-blue-400 rounded-xl shadow-lg">
+        <div className="px-8 py-10 flex-1 flex flex-col justify-center bg-transparent">
+          <h1 className="text-3xl font-bold mb-6 text-center text-blue-500 drop-shadow">Your Personality</h1>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block font-semibold mb-2 text-gray-700">Hobbies (comma-separated)</label>
+              <label className="block font-semibold mb-2 text-white drop-shadow">Hobbies (comma-separated)</label>
               <input
                 type="text"
                 value={hobbies}
                 onChange={(e) => setHobbies(e.target.value)}
-                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                className="w-full p-3 border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/10 text-white placeholder-white placeholder-opacity-70"
+                style={{ backdropFilter: "blur(2px)" }}
               />
             </div>
             <div>
-              <label className="block font-semibold mb-2 text-gray-700">Favorite Food</label>
+              <label className="block font-semibold mb-2 text-white drop-shadow">Favorite Food</label>
               <input
                 type="text"
                 value={favoriteFood}
                 onChange={(e) => setFavoriteFood(e.target.value)}
-                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                className="w-full p-3 border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/10 text-white placeholder-white placeholder-opacity-70"
+                style={{ backdropFilter: "blur(2px)" }}
               />
             </div>
             <div>
-              <label className="block font-semibold mb-2 text-gray-700">Qualities (comma-separated)</label>
+              <label className="block font-semibold mb-2 text-white drop-shadow">Qualities (comma-separated)</label>
               <input
                 type="text"
                 value={qualities}
                 onChange={(e) => setQualities(e.target.value)}
-                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                className="w-full p-3 border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/10 text-white placeholder-white placeholder-opacity-70"
+                style={{ backdropFilter: "blur(2px)" }}
               />
             </div>
             <div>
-              <label className="block font-semibold mb-2 text-gray-700">Tone</label>
+              <label className="block font-semibold mb-2 text-white drop-shadow">Tone</label>
               <select
                 value={tone}
                 onChange={(e) => setTone(e.target.value)}
-                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                className="w-full p-3 border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/10 text-white"
+                style={{ backdropFilter: "blur(2px)" }}
               >
                 <option value="neutral">Neutral</option>
                 <option value="friendly">Friendly</option>
@@ -145,13 +149,13 @@ export default function PersonalityPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-xl transition"
+              className="w-full bg-blue-500 bg-opacity-80 text-white font-bold py-3 rounded-xl transition hover:bg-blue-600"
             >
               {loading ? "Saving..." : "Save Personality"}
             </button>
           </form>
           {message && (
-            <p className="mt-6 text-center text-green-600 font-semibold">{message}</p>
+            <p className="mt-6 text-center text-green-300 font-semibold drop-shadow">{message}</p>
           )}
         </div>
       </div>
