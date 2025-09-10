@@ -21,10 +21,18 @@ export default function LoginPage() {
       setError(err.response?.data?.message || "Login failed");
     }
   };
-//hello jii
+
   return (
-    <div className="flex h-screen bg-orange-500 items-center justify-center">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-96 relative">
+    <div
+      className="fixed inset-0 flex items-center justify-center"
+      style={{
+        backgroundImage: "url('/background.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="bg-white bg-opacity-80 p-8 rounded-xl shadow-lg w-full max-w-md relative">
         {/* Floating Icon */}
         <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-yellow-400 p-4 rounded-full shadow-lg">
           <FaUser className="text-white text-xl" />
@@ -41,7 +49,7 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full p-3 border rounded-lg"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
           <input
             type="password"
@@ -49,10 +57,10 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full p-3 border rounded-lg"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
 
-          <button className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
+          <button className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition font-semibold">
             LOGIN
           </button>
         </form>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ import navigate hook
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -11,13 +11,12 @@ export default function PersonalityPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const navigate = useNavigate(); // ✅ create navigate functiona
+  const navigate = useNavigate();
 
-  const BASE_URL = `${apiUrl}/api/personality`; // backend URL
-  const userId = localStorage.getItem("userId"); // must be stored after login
-  const token = localStorage.getItem("token");   // auth token
+  const BASE_URL = `${apiUrl}/api/personality`;
+  const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
 
-  // Fetch personality data on mount
   useEffect(() => {
     const fetchPersonality = async () => {
       if (!userId) {
@@ -44,7 +43,6 @@ export default function PersonalityPage() {
     fetchPersonality();
   }, [userId, token]);
 
-  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -76,12 +74,11 @@ export default function PersonalityPage() {
 
       setMessage(res.data.message);
 
-      // ✅ Navigate to chat page after successful save
       if (res.status === 200 || res.status === 201) {
-         if (res.data.userId) {
-        localStorage.setItem("userId", res.data.userId);
-      }
-        setTimeout(() => navigate("/personality/chatpage"), 500); // small delay to show message
+        if (res.data.userId) {
+          localStorage.setItem("userId", res.data.userId);
+        }
+        setTimeout(() => navigate("/personality/chatpage"), 500);
       }
     } catch (error) {
       console.error("Save error:", error);
@@ -92,69 +89,72 @@ export default function PersonalityPage() {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-xl rounded-2xl">
-      <h2 className="text-2xl font-bold mb-4 text-center">Your Personality</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Hobbies */}
-        <div>
-          <label className="block font-semibold mb-1">Hobbies (comma-separated)</label>
-          <input
-            type="text"
-            value={hobbies}
-            onChange={(e) => setHobbies(e.target.value)}
-            className="w-full p-2 border rounded-lg"
-          />
+    <div
+      className="fixed inset-0 flex items-center justify-center"
+      style={{
+        backgroundImage: "url('/background.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="bg-white bg-opacity-80 rounded-xl shadow-lg w-full max-w-md h-[90vh] flex flex-col justify-center p-0">
+        <div className="px-8 py-10 flex-1 flex flex-col justify-center">
+          <h2 className="text-3xl font-bold mb-6 text-center text-indigo-700">Your Personality</h2>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block font-semibold mb-2 text-gray-700">Hobbies (comma-separated)</label>
+              <input
+                type="text"
+                value={hobbies}
+                onChange={(e) => setHobbies(e.target.value)}
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold mb-2 text-gray-700">Favorite Food</label>
+              <input
+                type="text"
+                value={favoriteFood}
+                onChange={(e) => setFavoriteFood(e.target.value)}
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold mb-2 text-gray-700">Qualities (comma-separated)</label>
+              <input
+                type="text"
+                value={qualities}
+                onChange={(e) => setQualities(e.target.value)}
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold mb-2 text-gray-700">Tone</label>
+              <select
+                value={tone}
+                onChange={(e) => setTone(e.target.value)}
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              >
+                <option value="neutral">Neutral</option>
+                <option value="friendly">Friendly</option>
+                <option value="professional">Professional</option>
+                <option value="funny">Funny</option>
+              </select>
+            </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-xl transition"
+            >
+              {loading ? "Saving..." : "Save Personality"}
+            </button>
+          </form>
+          {message && (
+            <p className="mt-6 text-center text-green-600 font-semibold">{message}</p>
+          )}
         </div>
-
-        {/* Favorite Food */}
-        <div>
-          <label className="block font-semibold mb-1">Favorite Food</label>
-          <input
-            type="text"
-            value={favoriteFood}
-            onChange={(e) => setFavoriteFood(e.target.value)}
-            className="w-full p-2 border rounded-lg"
-          />
-        </div>
-
-        {/* Qualities */}
-        <div>
-          <label className="block font-semibold mb-1">Qualities (comma-separated)</label>
-          <input
-            type="text"
-            value={qualities}
-            onChange={(e) => setQualities(e.target.value)}
-            className="w-full p-2 border rounded-lg"
-          />
-        </div>
-
-        {/* Tone */}
-        <div>
-          <label className="block font-semibold mb-1">Tone</label>
-          <select
-            value={tone}
-            onChange={(e) => setTone(e.target.value)}
-            className="w-full p-2 border rounded-lg"
-          >
-            <option value="neutral">Neutral</option>
-            <option value="friendly">Friendly</option>
-            <option value="professional">Professional</option>
-            <option value="funny">Funny</option>
-          </select>
-        </div>
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded-xl transition"
-        >
-          {loading ? "Saving..." : "Save Personality"}
-        </button>
-      </form>
-
-      {message && (
-        <p className="mt-4 text-center text-green-600 font-semibold">{message}</p>
-      )}
+      </div>
     </div>
   );
 }
